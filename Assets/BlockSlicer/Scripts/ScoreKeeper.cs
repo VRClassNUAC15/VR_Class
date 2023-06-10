@@ -9,10 +9,14 @@ public class ScoreKeeper : MonoBehaviour
     int score = 0;
     int pointsPerHit = 10;
 
-    int livesLeft;
+    int livesLeft = 5;
 
     public BlockSlicerGameLogic gameLogic;
 
+    private void Start()
+    {
+        livesLeftBoard.text = livesLeft.ToString();
+    }
     public void IncreaseScore()
     {
         score += pointsPerHit;
