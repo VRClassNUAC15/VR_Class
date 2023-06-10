@@ -1,22 +1,18 @@
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
 public class ScoreKeeper : MonoBehaviour
 {
-    public Text scoreBoard;
-    public Text livesLeftBoard;
+    public TMP_Text scoreBoard;
+    public TMP_Text livesLeftBoard;
 
     int score = 0;
     int pointsPerHit = 10;
 
     int livesLeft;
 
-    BlockSlicerGameLogic gameLogic;
+    public BlockSlicerGameLogic gameLogic;
 
-    private void Start()
-    {
-        gameLogic = FindObjectOfType<BlockSlicerGameLogic>().GetComponent<BlockSlicerGameLogic>();
-    }
     public void IncreaseScore()
     {
         score += pointsPerHit;
@@ -25,7 +21,7 @@ public class ScoreKeeper : MonoBehaviour
     public void DecreaseLives()
     {
         livesLeft--;
-        if(livesLeft == 0)
+        if(livesLeft <= 0)
         {
             gameLogic.GameOver();
         }

@@ -9,7 +9,7 @@ public class Block : MonoBehaviour
         DontHit
     }
     public BlockType myBlockType = BlockType.Left;
-
+    public ParticleSystem Explosion;
     ScoreKeeper scoreKeeper;
     float speed = 0.01f;
 
@@ -23,15 +23,11 @@ public class Block : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(!other.name.Contains("Left") && !other.name.Contains("Left"))
-        {
-            return;
-        }
-        if(other.name.Contains("Left") && myBlockType == BlockType.Left)
+        if(other.name.Contains("LeftSaber") && myBlockType == BlockType.Left)
         {
             scoreKeeper.IncreaseScore();
         }
-        else if (other.name.Contains("Right") && myBlockType == BlockType.Right)
+        else if (other.name.Contains("RightSaber") && myBlockType == BlockType.Right)
         {
             scoreKeeper.IncreaseScore();
         }
@@ -39,5 +35,7 @@ public class Block : MonoBehaviour
         {
             scoreKeeper.DecreaseLives();
         }
+        gameObject.SetActive(false);
+        
     }
 }
