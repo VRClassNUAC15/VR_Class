@@ -12,6 +12,12 @@ public class BlockSlicerGameLogic : MonoBehaviour
     public TMP_Text GameScoreText, EndGameScoreText, WinLoseText; 
     public GameObject Level;
     public AudioClip Music;
+
+    private void Start()
+    {
+        Level.SetActive(false);
+    }
+
     public void StartGame()
     {
         foreach(XRRayInteractor xRRay in XRRayInteractors)
@@ -28,6 +34,7 @@ public class BlockSlicerGameLogic : MonoBehaviour
         StartCoroutine("YieldEndOfLevel");
         GetComponent<AudioSource>().PlayOneShot(Music);
     }
+
     IEnumerator YieldEndOfLevel()
     {
         yield return new WaitForSeconds(Music.length + 1.0f);
@@ -36,14 +43,17 @@ public class BlockSlicerGameLogic : MonoBehaviour
             FinishedSong();
         }
     }
+
     public void GameOver()
     {
         LevelComplete(false);
     }
+
     public void FinishedSong()
     {
         LevelComplete(true);
     }
+
     void LevelComplete(bool didWin)
     {
         foreach (XRRayInteractor xRRay in XRRayInteractors)
@@ -60,6 +70,7 @@ public class BlockSlicerGameLogic : MonoBehaviour
         ScoreBoard.gameObject.SetActive(false);
         EndGameScoreText.text = GameScoreText.text;
     }
+
     public void Restart()
     {
         SceneManager.LoadScene(0);
